@@ -1,13 +1,9 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from geojson import Feature, Point
-import psycopg2
+from geoalchemy2 import Geometry
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from geoalchemy2 import Geometry
-from shapely.geometry import Point
 
 app = FastAPI()
 
@@ -45,6 +41,8 @@ def lake(name, geom):
         session.add(new_lake)
         session.commit()
     session.close()
-lake(name = "Garde", geom = "POLYGON((1 0,3 0,3 2,1 2,1 0))")
-lake(name = 'Orta', geom = "POLYGON((3 0,6 0,6 3,3 3,3 0))")
-lake(name = 'Majeur', geom = "POLYGON((0 0,1 0,1 1,0 1,0 0))")
+
+
+lake(name="Garde", geom="POLYGON((1 0,3 0,3 2,1 2,1 0))")
+lake(name='Orta', geom="POLYGON((3 0,6 0,6 3,3 3,3 0))")
+lake(name='Majeur', geom="POLYGON((0 0,1 0,1 1,0 1,0 0))")
